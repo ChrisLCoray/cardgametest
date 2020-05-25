@@ -1,8 +1,8 @@
 import * as angular from 'angular';
 import 'angular-mocks';
-import { gameMenu } from './menu.component';
+import { GameMenu } from './menu.component';
 
-describe('gameMenu component', () => {
+describe('GameMenu component', () => {
   // beforeEach(() => {
   //   angular
   //     .module('fountainHello', ['app/hello.html'])

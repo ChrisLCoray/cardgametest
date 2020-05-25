@@ -1,34 +1,34 @@
 export const CARD_DATA: Array<{ icon: string, id: number }> = [
     {
-        icon: '',
+        icon: 'mood',
         id: 1
     },
     {
-        icon: '',
+        icon: 'sports_esports',
         id: 2
     },
     {
-        icon: '',
+        icon: 'public',
         id: 3
     },
     {
-        icon: '',
+        icon: 'cake',
         id: 4
     },
     {
-        icon: '',
+        icon: 'sports_soccer',
         id: 5
     },
     {
-        icon: '',
+        icon: 'sports_basketball',
         id: 6
     },
     {
-        icon: '',
+        icon: 'emoji_objects',
         id: 7
     },
     {
-        icon: '',
+        icon: 'adb',
         id: 8
     }
 ];

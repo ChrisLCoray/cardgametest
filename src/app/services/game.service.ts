@@ -1,20 +1,25 @@
+import { copy } from 'angular';
 import { CARD_DATA } from '../constants/cardSource';
 import { COLOR_SOURCE } from '../constants/colorSource';
-import { Card } from '../../types';
+import { CardType } from '../../types';
 
 export class GameService {
-    colors = COLOR_SOURCE;
+    colors = copy(COLOR_SOURCE);
     usedColors = [0, 1, 2, 3, 4, 5, 6, 7];
 
     createCards() {
-        let deckPlaceholder = [];
+        let cardId = 0,
+        deckPlaceholder = [];
 
-        CARD_DATA.forEach((item) => {
+        CARD_DATA.forEach((item, index) => {
             const color = this.getColorForCard();
-            const card = { color: color, flipped: 0, icon: item.icon, id: item.id };
-            deckPlaceholder.push(card);
+            const card = { color: color, flipped: 0, icon: item.icon, id: cardId++, match: item.id };
+            deckPlaceholder.push(copy(card));
+            card.id = cardId++;
             deckPlaceholder.push(card);
         });
+
+        console.log('deckPlaceholder = ', deckPlaceholder);
 
         return this.randomizeCards(deckPlaceholder);
     }
@@ -28,27 +33,32 @@ export class GameService {
     }
 
     getColorForCard() {
-        const randInt = Math.floor(Math.random() * Math.floor(this.usedColors.length));
-        const colorIndex = this.usedColors.indexOf(randInt);
-        this.usedColors.splice(colorIndex, 1);
-        return this.colors[randInt];
+        const randInt = Math.floor(Math.random() * Math.floor(this.colors.length));
+        const color = copy(this.colors[randInt]);
+        const colorIndex = this.colors.indexOf(color);
+        this.colors.splice(colorIndex, 1);
+        return color;
     }
 
-    randomizeCards(cards: Card[]) {
-        let currentIndex = cards.length,
+    randomizeCards(cards: CardType[]) {
+        let deckSize = cards.length,
             randomizedDeck = [];
 
-        for (var i = 0; i < cards.length; i++) {
+        for (var i = 0; i < deckSize; i++) {
             const randCard = Math.floor(Math.random() * Math.floor(cards.length));
-            randomizedDeck.push(cards[randCard]);
-            cards.splice(randCard, 1);
+            const card = cards[randCard];
+            if (card !== undefined) {
+                const cardIndex = cards.indexOf(card);
+                randomizedDeck.push(card);
+                cards.splice(cardIndex, 1);
+            }
         }
 
         return randomizedDeck;
     }
 
     startGame() {
-        this.usedColors = this.createTrackerArray(0,7);
+        this.colors = copy(COLOR_SOURCE);
         return this.createCards();
     }
 }

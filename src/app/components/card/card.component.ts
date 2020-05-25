@@ -1,10 +1,21 @@
-export const card: angular.IComponentOptions = {
+import { GameService } from '../../services/game.service';
+import { CardType } from '../../../types';
+
+class CardController {
+  card: CardType[];
+  moves: number;
+
+  constructor (
+    public gameService: GameService
+  ) {
+    console.log('this.card = ', this.card);
+  }
+}
+
+export const Card: angular.IComponentOptions = {
   template: require('./card.component.html'),
-  controller: function () { // eslint-disable-line babel/object-shorthand
-    // this.card = 'Hello World!';
-    // states: back / front
-    // binding:
-    // - state?
-    // - click counter
+  controller: CardController,
+  bindings: {
+    card: '<'
   }
 };

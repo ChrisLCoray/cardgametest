@@ -6,7 +6,7 @@ class MenuController {
   constructor (
     public gameService: GameService
   ) {
-    this.moves = 0;
+
   }
 
   resetGame() {
@@ -15,7 +15,7 @@ class MenuController {
   }
 }
 
-export const gameMenu: angular.IComponentOptions = {
+export const GameMenu: angular.IComponentOptions = {
   template: require('./menu.component.html'),
   controller: MenuController,
   bindings: {

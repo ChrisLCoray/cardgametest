@@ -1,4 +1,83 @@
-body {
-  background-color: lightgrey;
-}
+/* Vars */
+$cardSize: 150px;
+$dark-gray: #303030;
 
+body {
+  background-color: $dark-gray;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin: 0;
+  padding: 1em;
+
+  footer, header {
+    background-color: white;
+    color: $dark-gray;
+    padding: 0 1em;
+  }
+
+  header { 
+    font-weight: 600;
+  }
+
+  footer {
+    display: block;
+    font-size: 14px;
+    margin-left: -1em;
+    padding: .3em 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .card-container {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 12px;
+    display: block;
+    flex: 1 0 21%;
+    margin: 0.5em;
+    position: relative;
+    width: $cardSize;
+    height: $cardSize;
+
+    .card-back {
+      cursor: pointer;
+      display: none;
+      position: absolute;
+      width: $cardSize;
+      height: $cardSize;
+    }
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .game-menu {
+    display: block;
+    font-size: 14px;
+    padding: .5em 0;
+    margin-bottom: 1em;
+
+    button {
+      float: left;
+    }
+
+    .moves-display {
+      float: right;
+    }
+  }
+
+  #game-area {
+    border: 1px solid black;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    min-height: 400px;
+    padding: 1em;
+    width: 60%;
+  }
+}
