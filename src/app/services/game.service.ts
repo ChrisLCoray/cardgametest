@@ -10,16 +10,19 @@ export class GameService {
     moves: number = 0;
 
     checkForMatch(card: any) {
-        this.moves++;
         if (this.lastCard.match !== undefined) {
-            console.log('this.lastCard = ', this.lastCard);
-            console.log('card = ', card);
             if (this.lastCard.match === card.match) {
-                return true;
+                this.currentDeck.find(card => card.id === this.lastCard.id).flipped = true;
+                this.currentDeck.find(cCard => card.id === cCard.id).flipped = true;
+                this.lastCard = {};
+                return this.currentDeck;
             } else {
-                return false;
+                this.currentDeck.find(card => card.id === this.lastCard.id).flipped = false;
+                this.currentDeck.find(cCard => card.id === cCard.id).flipped = false;
+                this.lastCard = {};
+
+                return this.currentDeck;
             }
-            this.lastCard = {};
         } else {
             this.lastCard = copy(card);
             return;

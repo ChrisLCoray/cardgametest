@@ -1,6 +1,5 @@
 <section class="game-menu">
     <button ng-click="$ctrl.startGame()">Start New Game</button>
-    <button ng-click="$ctrl.clearBoard()">CLEAR BOARD</button>
     <div class="moves-display">Moves: {{ $ctrl.moves }}</div>
     <br class="clear" />
 </section>
@@ -8,6 +7,6 @@
     <card-component
         class="card-container"
         ng-repeat="card in $ctrl.cards track by card.id"
-        card="card" moves="$ctrl.moves">
+        card="card" flip-card="$ctrl.flipCard(card)">
     </card-component>
 </div>
