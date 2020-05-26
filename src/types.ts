@@ -1,6 +1,6 @@
 export class CardType {
     color: string;
-    flipped?: boolean;
+    flipped?: number;
     icon: string;
     id: number;
     match: number;

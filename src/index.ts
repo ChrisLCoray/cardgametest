@@ -5,17 +5,17 @@ import { App } from './app/App';
 import 'angular-ui-router';
 import routesConfig from './routes';
 
-// Components
+// components
 import { Card } from './app/components/card/card.component';
 import { Footer } from './app/components/footer/footer.component';
 import { Game } from './app/components/game/game.component';
 import { GameMenu } from './app/components/menu/menu.component';
 import { Header } from './app/components/header/header.component';
 
-// Services
+// services
 import { GameService } from './app/services/game.service';
 
-// Styles
+// styles
 import './index.scss';
 
 export const app: string = 'app';

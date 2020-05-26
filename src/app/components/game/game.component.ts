@@ -6,27 +6,36 @@ class GameController {
   gameContainer: any;
   cards: CardType[];
   moves: number;
+  $scope: any;
 
   constructor (
-    $document: any,
     $scope: any,
     public gameService: GameService
   ) {
-    this.gameContainer = document.getElementById('game-area');
-    console.log('this.gameContainer = ', this.gameContainer);
+    this.$scope = $scope;
+    this.cards = [];
     this.moves = 0;
   }
 
   clearBoard() {
-    this.gameContainer.innerHtml = '';
+    this.cards = [];
+    this.moves = 0;
   }
 
   startGame() {
-    // this.clearBoard();
-    this.cards = this.gameService.startGame();
-    console.log('this.cards = ', this.cards);
+    console.log('startGame');
+    this.clearBoard();
+    this.gameService.startGame()
+      .then((data: { moves: number, cards: CardType[]}) => {
+        this.cards = data.cards;
+        this.moves = data.moves;
+        console.log('this.cards = ', this.cards);
+        this.$scope.$apply(this.cards);
+      });
   }
 };
+
+GameController.$inject = ['$scope', 'gameService'];
 
 export const Game: angular.IComponentOptions = {
   template: require('./game.component.html'),

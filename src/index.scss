@@ -42,11 +42,22 @@ body {
     height: $cardSize;
 
     .card-back {
+      background-color: #393276;
+      border: 1px solid white;
+      border-radius: 12px;
       cursor: pointer;
-      display: none;
       position: absolute;
-      width: $cardSize;
+      width: $cardSize + 9;
       height: $cardSize;
+    }
+
+    .material-icons {
+      display: block;
+      font-size: 60px;
+      height: 60px;
+      width: 60px;
+      margin: 45px auto;
+      z-index: 100;
     }
   }
 

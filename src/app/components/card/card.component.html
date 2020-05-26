@@ -1,4 +1,11 @@
-<i class="material-icons" ng-style="{'color': $card.color}" ng-show="$card.flipped">{{ $card.icon }}</i>
-<p>Color: {{ $card.color }}</p>
-<p>Icon: {{ $card.icon }}</p>
-<div class="card-back" ng-show="!$card.flipped"></div>
+<i 
+    class="material-icons"
+    ng-style="{'color': '#'+$ctrl.card.color }"
+    ng-show="$ctrl.card.flipped">
+        {{ $ctrl.card.icon }}
+</i>
+<div
+    class="card-back"
+    ng-show="!$ctrl.card.flipped"
+    ng-click="$ctrl.flipCard()">
+</div>

@@ -5,23 +5,49 @@ import { CardType } from '../../types';
 
 export class GameService {
     colors = copy(COLOR_SOURCE);
-    usedColors = [0, 1, 2, 3, 4, 5, 6, 7];
+    currentDeck: any = [];
+    lastCard: any = {};
+    moves: number = 0;
+
+    checkForMatch(card: any) {
+        this.moves++;
+        if (this.lastCard.match !== undefined) {
+            console.log('this.lastCard = ', this.lastCard);
+            console.log('card = ', card);
+            if (this.lastCard.match === card.match) {
+                return true;
+            } else {
+                return false;
+            }
+            this.lastCard = {};
+        } else {
+            this.lastCard = copy(card);
+            return;
+        }
+    }
 
     createCards() {
-        let cardId = 0,
-        deckPlaceholder = [];
+        return new Promise(resolve => {
+            let cardId = 0,
+            deckPlaceholder = [];
 
-        CARD_DATA.forEach((item, index) => {
-            const color = this.getColorForCard();
-            const card = { color: color, flipped: 0, icon: item.icon, id: cardId++, match: item.id };
-            deckPlaceholder.push(copy(card));
-            card.id = cardId++;
-            deckPlaceholder.push(card);
+            CARD_DATA.forEach((item, index) => {
+                const color = this.getColorForCard();
+                const card = { color: color, flipped: 0, icon: item.icon, id: cardId++, match: item.id };
+                deckPlaceholder.push(copy(card));
+                card.id = cardId++;
+                deckPlaceholder.push(card);
+            });
+
+            this.currentDeck = this.randomizeCards(deckPlaceholder);
+            this.moves = 0;
+            let data = {
+                moves: this.moves,
+                cards: this.currentDeck
+            };
+
+            resolve(data);
         });
-
-        console.log('deckPlaceholder = ', deckPlaceholder);
-
-        return this.randomizeCards(deckPlaceholder);
     }
 
     createTrackerArray(min: number, max: number) {
